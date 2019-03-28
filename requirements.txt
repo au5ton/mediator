@@ -1,0 +1,4 @@
+Pyrogram==0.11.0
+python-dotenv==0.10.1
+TgCrypto==1.1.1
+colorama==0.4.1
