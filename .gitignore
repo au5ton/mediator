@@ -102,3 +102,10 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# pyrogram stuff
+*.session
+downloads/
+
+# vscode things
+.vscode/

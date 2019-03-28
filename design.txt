@@ -1,0 +1,55 @@
+mediatedbot
+
+/start <Introduction message>
+
+/help <Detailed usage>
+
+/newchat "Name of chat" --timezone -6
+- Bot creates a new group chat with itself
+- Bot sets up permissions
+	- Disable polls
+	- Disable add members
+	- Disable pin messages
+	- Disable change group info
+	- Group type: private
+	- Chat history: visible (need to see TOS)
+- Sends TOS message to group and pins
+- Sends invite link to invoker
+- Invoker is responsible for getting another party to join via the link (don't spam users, user only joins chat consensually)
+- Deletes within 24 hours unless at least 2 people are present in group
+
+event: bot started
+- set online status to online
+
+event: bot stopped or killed
+- set online status to offline
+
+event: new message from individual
+- interpret commands
+
+event: self added to group
+- send message about intended use
+- leave group
+
+event: user added to group
+- check chat_id against database of mediated groups
+- if mediated group:
+	- send message Austin Jackson (@austinj) has a Telegram ID of 80379146.
+	- if group name is automatic:
+		- update group name to list of users
+
+event: new message from group
+- check chat_id against database of mediated groups
+- if a mediated group:
+	- Replay senders message
+		- Prepend with:
+			- if no media / text only:
+				- [ID#80379146] @austinj: message goes here
+			- if media/sticker/etc attached:
+				- [ID#80379146] @austinj sent media
+	
+	- Delete senders message
+
+
+Database schema:
+- columns: group_id, automatic_title 
